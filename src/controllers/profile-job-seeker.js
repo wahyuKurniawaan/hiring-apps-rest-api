@@ -4,10 +4,7 @@ const {
   putProfileJobSeekerDataModel,
   deleteProfileJobSeekerDataModel,
   patchProfileJobSeekerDataModel,
-  getProfileJobSeekerDataByIdModel,
-  getProfileJobSeekerDataByNameModel,
-  getProfileJobSeekerDataBySkillModel,
-  getProfileJobSeekerDataByCityModel
+  getProfileJobSeekerDataByIdModel
 } = require('../models/profile-job-seeker')
 
 module.exports = {
@@ -17,7 +14,7 @@ module.exports = {
     let searchValue = ''
     if (typeof search === 'object') {
       searchKey = Object.keys(search)[0]
-      searchValue = Object.keys(search)[0]
+      searchValue = Object.values(search)[0]
     } else {
       searchKey = 'status_job'
       searchValue = search || ''
@@ -26,6 +23,9 @@ module.exports = {
     !page ? page = 1 : page = parseInt(page)
     const offset = (page - 1) * limit
     getProfileJobSeekerDataModel(searchKey, searchValue, limit, offset, result => {
+      console.log(`search key = ${searchKey}`)
+      console.log(`search value = ${searchValue}`)
+      console.log(`search = ${search}`)
       if (result.length) {
         res.send({
           success: true,
@@ -53,59 +53,6 @@ module.exports = {
         res.send({
           success: true,
           message: `Data profile job seeker with id = ${id} was not found!`
-        })
-      }
-    })
-  },
-  getProfileJobSeekerDataBySkill: (req, res) => {
-    const { id } = req.params
-    getProfileJobSeekerDataBySkillModel(id, result => {
-      if (result.length) {
-        res.send({
-          success: true,
-          message: `Data profile job seeker with skill = ${id}`,
-          data: result
-        })
-      } else {
-        res.send({
-          success: true,
-          message: `Data profile job seeker with skill = ${id} was not found!`
-        })
-      }
-    })
-  },
-  getProfileJobSeekerDataByName: (req, res) => {
-    const { name } = req.params
-    getProfileJobSeekerDataByNameModel(name, result => {
-      if (result.length) {
-        res.send({
-          success: true,
-          message: `Data profile job seeker with name = ${name}`,
-          data: result
-        })
-      } else {
-        console.log(result)
-        res.send({
-          success: true,
-          message: `Data profile job seeker with name = ${name} was not found!`
-        })
-      }
-    })
-  },
-  getProfileJobSeekerDataByCity: (req, res) => {
-    const { city } = req.params
-    getProfileJobSeekerDataByCityModel(city, result => {
-      if (result.length) {
-        res.send({
-          success: true,
-          message: `Data profile job seeker with city = ${city}`,
-          data: result
-        })
-      } else {
-        console.log(result)
-        res.send({
-          success: true,
-          message: `Data profile job seeker with city = ${city} was not found!`
         })
       }
     })
@@ -235,7 +182,7 @@ module.exports = {
       } else {
         res.send({
           success: false,
-          message: 'Data account was not found!'
+          message: 'Data profile was not found!'
         })
       }
     })

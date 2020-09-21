@@ -3,26 +3,13 @@ module.exports = {
   getProfileJobSeekerDataModel: (searchKey, searchValue, limit, offset, callBack) => {
     db.query(`SELECT * FROM profile_job_seeker WHERE ${searchKey} LIKE '%${searchValue}%' 
     LIMIT ${limit} OFFSET ${offset}`, (err, result, fields) => {
+      console.log(`error = ${err}`)
+      console.log(`result = ${result}`)
       !err ? callBack(result) : callBack(err)
     })
   },
   getProfileJobSeekerDataByIdModel: (id, callBack) => {
     db.query(`SELECT * FROM profile_job_seeker WHERE id_profile_job_seeker = '${id}'`, (err, result, field) => {
-      !err ? callBack(result) : callBack(err)
-    })
-  },
-  getProfileJobSeekerDataByNameModel: (name, callBack) => {
-    db.query(`SELECT * FROM profile_job_seeker WHERE full_name LIKE '%${name}%'`, (err, result, field) => {
-      !err ? callBack(result) : callBack(err)
-    })
-  },
-  getProfileJobSeekerDataByCityModel: (city, callBack) => {
-    db.query(`SELECT * FROM profile_job_seeker WHERE city LIKE '%${city}%'`, (err, result, field) => {
-      !err ? callBack(result) : callBack(err)
-    })
-  },
-  getProfileJobSeekerDataBySkillModel: (id, callBack) => {
-    db.query(`SELECT * FROM profile_job_seeker WHERE id_skill = '${id}'`, (err, result, field) => {
       !err ? callBack(result) : callBack(err)
     })
   },
