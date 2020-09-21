@@ -6,7 +6,8 @@ const {
   patchProfileJobSeekerDataModel,
   getProfileJobSeekerDataByIdModel,
   getProfileJobSeekerDataByNameModel,
-  getProfileJobSeekerDataBySkillModel
+  getProfileJobSeekerDataBySkillModel,
+  getProfileJobSeekerDataByCityModel
 } = require('../models/profile-job-seeker')
 
 module.exports = {
@@ -18,10 +19,10 @@ module.exports = {
       searchKey = Object.keys(search)[0]
       searchValue = Object.keys(search)[0]
     } else {
-      searchKey = 'full_name'
+      searchKey = 'status_job'
       searchValue = search || ''
     }
-    !limit ? limit = 20 : limit = parseInt(limit)
+    !limit ? limit = 30 : limit = parseInt(limit)
     !page ? page = 1 : page = parseInt(page)
     const offset = (page - 1) * limit
     getProfileJobSeekerDataModel(searchKey, searchValue, limit, offset, result => {
@@ -87,6 +88,24 @@ module.exports = {
         res.send({
           success: true,
           message: `Data profile job seeker with name = ${name} was not found!`
+        })
+      }
+    })
+  },
+  getProfileJobSeekerDataByCity: (req, res) => {
+    const { city } = req.params
+    getProfileJobSeekerDataByCityModel(city, result => {
+      if (result.length) {
+        res.send({
+          success: true,
+          message: `Data profile job seeker with city = ${city}`,
+          data: result
+        })
+      } else {
+        console.log(result)
+        res.send({
+          success: true,
+          message: `Data profile job seeker with city = ${city} was not found!`
         })
       }
     })

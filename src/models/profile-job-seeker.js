@@ -16,6 +16,11 @@ module.exports = {
       !err ? callBack(result) : callBack(err)
     })
   },
+  getProfileJobSeekerDataByCityModel: (city, callBack) => {
+    db.query(`SELECT * FROM profile_job_seeker WHERE city LIKE '%${city}%'`, (err, result, field) => {
+      !err ? callBack(result) : callBack(err)
+    })
+  },
   getProfileJobSeekerDataBySkillModel: (id, callBack) => {
     db.query(`SELECT * FROM profile_job_seeker WHERE id_skill = '${id}'`, (err, result, field) => {
       !err ? callBack(result) : callBack(err)

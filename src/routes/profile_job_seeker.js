@@ -7,7 +7,8 @@ const {
   patchProfileJobSeekerData,
   getProfileJobSeekerDataById,
   getProfileJobSeekerDataByName,
-  getProfileJobSeekerDataBySkill
+  getProfileJobSeekerDataBySkill,
+  getProfileJobSeekerDataByCity
 } = require('../controllers/profile-job-seeker')
 
 const router = Router()
@@ -15,6 +16,7 @@ const router = Router()
 router.get('/', getProfileJobSeekerData)
 router.get('/:id', getProfileJobSeekerDataById)
 router.get('/name/:name', getProfileJobSeekerDataByName)
+router.get('/city/:city', getProfileJobSeekerDataByCity)
 router.get('/skill/:id', getProfileJobSeekerDataBySkill)
 router.post('/', createProfileJobSeekerData)
 router.put('/:id', putProfileJobSeekerData)
