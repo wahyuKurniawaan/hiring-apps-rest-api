@@ -5,19 +5,13 @@ const {
   putProfileJobSeekerData,
   deleteProfileJobSeekerData,
   patchProfileJobSeekerData,
-  getProfileJobSeekerDataById,
-  getProfileJobSeekerDataByName,
-  getProfileJobSeekerDataBySkill,
-  getProfileJobSeekerDataByCity
+  getProfileJobSeekerDataById
 } = require('../controllers/profile-job-seeker')
 
 const router = Router()
 
 router.get('/', getProfileJobSeekerData)
 router.get('/:id', getProfileJobSeekerDataById)
-router.get('/name/:name', getProfileJobSeekerDataByName)
-router.get('/city/:city', getProfileJobSeekerDataByCity)
-router.get('/skill/:id', getProfileJobSeekerDataBySkill)
 router.post('/', createProfileJobSeekerData)
 router.put('/:id', putProfileJobSeekerData)
 router.delete('/:id', deleteProfileJobSeekerData)
