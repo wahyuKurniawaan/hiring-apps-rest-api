@@ -1,5 +1,6 @@
 // const { response } = require('express')
 const express = require('express')
+require('dotenv').config()
 const bodyParser = require('body-parser')
 const apps = express()
 // const { query } = require('./src/helper/db')
@@ -24,6 +25,6 @@ apps.use('/project-recruiter', projectRecruiter)
 apps.use('/skill', skill)
 apps.use('/work-exp-job-seeker', workExpJobSeeker)
 
-apps.listen(8080, () => {
+apps.listen(process.env.PORT, () => {
   console.log('Listening to port 8080!')
 })
