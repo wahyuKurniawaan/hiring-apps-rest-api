@@ -1,9 +1,9 @@
-// const { response } = require('express')
 const express = require('express')
 require('dotenv').config()
 const bodyParser = require('body-parser')
 const apps = express()
-// const { query } = require('./src/helper/db')
+const cors = require('cors')
+
 const projectRouter = require('./src/routes/project')
 const accountJobSeeker = require('./src/routes/account-job-seeker')
 const accountRecruiter = require('./src/routes/account-recruiter')
@@ -15,6 +15,7 @@ const skill = require('./src/routes/skill')
 const workExpJobSeeker = require('./src/routes/work-exp-job-seeker')
 const user = require('./src/routes/user')
 
+apps.use(cors())
 apps.use(bodyParser.urlencoded({ extended: true }))
 apps.use('/project', projectRouter)
 apps.use('/users', user)
@@ -27,6 +28,11 @@ apps.use('/project-recruiter', projectRecruiter)
 apps.use('/skill', skill)
 apps.use('/work-exp-job-seeker', workExpJobSeeker)
 
+apps.use((request, response, next) => {
+  response.header('Access-Control-Allow-Origin', '*')
+  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
 apps.listen(process.env.PORT, () => {
   console.log('Listening to port 8080!')
 })
