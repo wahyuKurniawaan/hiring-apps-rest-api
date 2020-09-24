@@ -11,7 +11,7 @@ module.exports = {
       !err ? callBack(result) : callBack(err)
     })
   },
-  createProjectRecruiterDataModel: (data, callBack) => {
+  createProjectRecruiterDataModel: (data, image, callBack) => {
     db.query(`INSERT INTO project_recruiter (
       project_name,
       project_description,
@@ -20,8 +20,7 @@ module.exports = {
       project_image,
       repository_link,  
       id_skill
-      ) VALUES ('${data[0]}', '${data[1]}', '${data[2]}', '${data[3]}', '${data[4]}', '${data[5]}',
-      '${data[6]}')`, (err, result, fields) => {
+      ) VALUES ('${data[0]}', '${data[1]}', '${data[2]}', '${data[3]}', ? , '${data[4]}', '${data[5]}')`, image, (err, result, fields) => {
       !err ? callBack(result) : callBack(err)
     })
   },

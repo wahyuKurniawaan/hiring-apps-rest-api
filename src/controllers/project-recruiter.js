@@ -57,10 +57,12 @@ module.exports = {
     })
   },
   createProjectRecruiterData: (req, res) => {
-    const { name, description, startDate, endDate, image, repoLink, idSkill } = req.body
-    if (name.trim() && description.trim() && startDate.trim() && endDate.trim() && image.trim() &&
+    const { name, description, startDate, endDate, repoLink, idSkill } = req.body
+    const image = req.file === 'undefined' ? '' : req.file.filename
+    if (name.trim() && description.trim() && startDate.trim() && endDate.trim() &&
     repoLink.trim() && idSkill.trim()) {
-      createProjectRecruiterDataModel([name, description, startDate, endDate, image, repoLink, idSkill], result => {
+      createProjectRecruiterDataModel([name, description, startDate, endDate, repoLink, idSkill], image, result => {
+        console.log(req.file)
         res.send({
           success: true,
           message: 'project has been created',

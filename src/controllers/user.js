@@ -65,8 +65,6 @@ module.exports = {
             data: payload
           })
           console.log('Berhasil Login!')
-          console.log(checkDataUser)
-          console.log(tokenLogin)
         } else {
           response.send({
             success: false,

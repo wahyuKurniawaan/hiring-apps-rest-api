@@ -4,8 +4,6 @@ const {
   loginUser
 } = require('../controllers/user')
 
-const { authorization } = require('../middleware/authorization')
-
 const router = Router()
 
 router.post('/register/', registerUser)

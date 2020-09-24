@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const uploadImage = require('../middleware/multer')
 const {
   getProfileJobSeekerData,
   createProfileJobSeekerData,
@@ -12,7 +13,7 @@ const router = Router()
 
 router.get('/', getProfileJobSeekerData)
 router.get('/:id', getProfileJobSeekerDataById)
-router.post('/', createProfileJobSeekerData)
+router.post('/', uploadImage, createProfileJobSeekerData)
 router.put('/:id', putProfileJobSeekerData)
 router.delete('/:id', deleteProfileJobSeekerData)
 router.patch('/:id', patchProfileJobSeekerData)

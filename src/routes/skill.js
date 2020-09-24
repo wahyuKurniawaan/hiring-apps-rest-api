@@ -7,10 +7,11 @@ const {
   patchSkillData,
   getSkillDataById
 } = require('../controllers/skill')
+const { authorizationJobSeeker } = require('../middleware/authorization')
 
 const router = Router()
 
-router.get('/', getSkillData)
+router.get('/', authorizationJobSeeker, getSkillData)
 router.get('/:id', getSkillDataById)
 router.post('/', createSkillData)
 router.put('/:id', putSkillData)

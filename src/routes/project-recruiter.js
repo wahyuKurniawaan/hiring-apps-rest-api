@@ -1,4 +1,6 @@
 const { Router } = require('express')
+const multer = require('multer')
+const upload = multer({ dest: './uploads/' })
 const {
   getProjectRecruiterData,
   createProjectRecruiterData,
@@ -12,7 +14,7 @@ const router = Router()
 
 router.get('/', getProjectRecruiterData)
 router.get('/:id', getProjectRecruiterDataById)
-router.post('/', createProjectRecruiterData)
+router.post('/', upload.single('image'), createProjectRecruiterData)
 router.put('/:id', putProjectRecruiterData)
 router.delete('/:id', deleteProjectRecruiterData)
 router.patch('/:id', patchProjectRecruiterData)
