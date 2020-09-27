@@ -8,13 +8,14 @@ const {
   patchProfileJobSeekerData,
   getProfileJobSeekerDataById
 } = require('../controllers/profile-job-seeker')
+const { authorizationJobSeeker } = require('../middleware/authorization')
 
 const router = Router()
 
-router.get('/', getProfileJobSeekerData)
-router.get('/:id', getProfileJobSeekerDataById)
-router.post('/', uploadImage, createProfileJobSeekerData)
-router.put('/:id', putProfileJobSeekerData)
-router.delete('/:id', deleteProfileJobSeekerData)
-router.patch('/:id', patchProfileJobSeekerData)
+router.get('/', authorizationJobSeeker, getProfileJobSeekerData)
+router.get('/:id', authorizationJobSeeker, getProfileJobSeekerDataById)
+router.post('/', authorizationJobSeeker, uploadImage, createProfileJobSeekerData)
+router.put('/:id', authorizationJobSeeker, putProfileJobSeekerData)
+router.delete('/:id', authorizationJobSeeker, deleteProfileJobSeekerData)
+router.patch('/:id', authorizationJobSeeker, patchProfileJobSeekerData)
 module.exports = router

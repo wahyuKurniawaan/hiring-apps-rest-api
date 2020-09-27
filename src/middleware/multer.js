@@ -1,45 +1,41 @@
 const multer = require('multer')
+const path = require('path')
 
 const storage = multer.diskStorage({
-  destination: (request, file, callback) => {
+  destination: (req, file, callback) => {
     callback(null, './uploads/')
   },
   filename: (req, file, callback) => {
-    console.log(file.mimetype)
-    callback(null, file.originalname + '-' + Date.now())
+    callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
   }
 })
-
 const fileFilter = (request, file, callback) => {
-  console.log('file filter = ' + file)
-  if (file.mimetipe === 'image/jpeg' || file.mimetipe === 'image/png') {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     callback(null, true)
   } else {
-    return callback(new Error('Extention file must be JPG or PNG'), false)
+    return callback(new Error('Extension file must be JPG or PNG'), false)
   }
 }
-
 const limits = { fileSize: 1024 * 1024 * 1 }
 
-let upload = multer({ storage, fileFilter, limits }).single('image')
+const upload = multer({ storage, fileFilter, limits }).single('image')
 
 const uploadFilter = (request, response, next) => {
-  upload(request, response, function (error) {
-    if (error instanceof multer.MulterError) {
-      // multer error when uploading
-      console.log(error.message)
-      response.send({
+  upload(request, response, function (err) {
+    if (err instanceof multer.MulterError) {
+      // A Multer error occurred when uploading.
+      response.status(400).send({
         success: false,
-        message: 'Error uploading'
+        message: err.message
       })
-    } else if (error) {
-      // unknown error
-      console.log(error.message)
-      response.send({
+    } else if (err) {
+      // An unknown error occurred when uploading.
+      response.status(400).send({
         success: false,
-        message: 'Error uploading'
+        message: err.message
       })
-    } else { next() }
+    }
+    next()
   })
 }
 
