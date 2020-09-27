@@ -37,5 +37,8 @@ app.listen(process.env.PORT, () => {
   console.log('Listening to port 8080!')
 })
 app.get('/', (request, response) => {
-  response.send('Android 1 backend')
+  response.send({
+     success: true,
+     message: 'Back end server hiring apps wahyu kurniawan' 
+  })
 })
