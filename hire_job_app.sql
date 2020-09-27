@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2020 at 10:17 AM
+-- Generation Time: Sep 27, 2020 at 12:52 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -53,8 +53,8 @@ INSERT INTO `account_job_seeker` (`id_account_job_seeker`, `email`, `full_name`,
 (7, 'mrizki12@gmail.com', 'Muhammad Rizki', '126482325', 'password is too strong', 'logged out', '2020-09-19 14:03:16', '2020-09-19 14:03:16'),
 (8, 'masrei@gmail.com', 'Reihan Bayzaki', '981573928', 'password must contain number', 'logged in', '2020-09-19 14:04:02', '2020-09-19 14:04:02'),
 (9, 'kakros@gmail.com', 'Rosyida Widadina', '14268421', 'password must contain alphabet', 'logged in', '2020-09-19 14:05:10', '2020-09-19 14:05:10'),
-(11, 'testpatch@email.com', 'test patch name', '123124124', 'password patch', 'logged out', '2020-09-19 14:23:34', '2020-09-19 14:23:34'),
-(12, 'test@email.com', 'test nama', '123456789', 'test password', 'logged in', '2020-09-19 16:18:06', '2020-09-19 16:18:06');
+(10, 'testpatch@email.com', 'test patch name', '123124124', 'password patch', 'logged out', '2020-09-19 14:23:34', '2020-09-19 14:23:34'),
+(11, 'test@email.com', 'test nama', '123456789', 'test password', 'logged in', '2020-09-19 16:18:06', '2020-09-19 16:18:06');
 
 -- --------------------------------------------------------
 
@@ -115,7 +115,7 @@ CREATE TABLE `portofolio_job_seeker` (
 INSERT INTO `portofolio_job_seeker` (`id_portofolio`, `application_name`, `description`, `publication_link`, `repository_link`, `workplace`, `type`, `portofolio_image`) VALUES
 (1, 'Project Camera', 'membuat aplikasi android camera', 'https://github.com/wahyuKurniawaan', 'https://github.com/wahyuKurniawaan', 'project pribadi', 'mobile application', 'https://icons.iconarchive.com/icons/treetog/junior/256/folder-blue-pictures-icon.png'),
 (2, 'Project Realtime CCTV 24 Hour', 'membuat aplikasi android yang memantau cctv secara langsung melalui HP', 'https://github.com/wahyuKurniawaan', 'https://github.com/wahyuKurniawaan', 'project pribadi', 'mobile application', 'https://icons.iconarchive.com/icons/aha-soft/free-global-security/128/CCTV-Camera-icon.png'),
-(4, 'Application galery theme', 'membuat aplikasi android galeri foto dengan banyak tema', 'https://github.com/wahyuKurniawaan', 'https://github.com/wahyuKurniawaan', 'project pribadi', 'mobile application', 'https://icons.iconarchive.com/icons/gakuseisean/aire/128/Images-icon.png');
+(3, 'Application galery theme', 'membuat aplikasi android galeri foto dengan banyak tema', 'https://github.com/wahyuKurniawaan', 'https://github.com/wahyuKurniawaan', 'project pribadi', 'mobile application', 'https://icons.iconarchive.com/icons/gakuseisean/aire/128/Images-icon.png');
 
 -- --------------------------------------------------------
 
@@ -156,7 +156,9 @@ INSERT INTO `profile_job_seeker` (`id_profile_job_seeker`, `id_account_job_seeke
 (9, 8, 8, 7, 'masrei@gmail.com', 'Reyhan Bayzaki', 'Android Developer', 'full time', 'Jl. istana merdeka', 'Bandung', 'Arkademy', 'no pic', 'sedang mengikuti bootcamp', '2020-09-20 19:29:44', '2020-09-20 19:29:44'),
 (10, 9, 9, 8, 'kakros@gmail.com', 'Rosyida Widadina', 'Android Developer', 'full time', 'Jl. istana merdeka', 'Bandung', 'Arkademy', 'no pic', 'sedang mengikuti bootcamp', '2020-09-20 19:30:07', '2020-09-20 19:30:07'),
 (14, 1, 1, 1, 'test email', 'test name', 'Android Developer', 'full time', 'test address', 'Jakarta', 'Arkademy', 'no pic', 'sedang mengikuti bootcamp', '2020-09-21 11:22:20', '2020-09-21 11:22:20'),
-(15, 1, 1, 1, 'test email', 'test name', 'Android Developer', 'full time', 'test address', 'Jakarta', 'Arkademy', 'no pic', 'sedang mengikuti bootcamp', '2020-09-21 11:25:42', '2020-09-21 11:25:42');
+(15, 1, 1, 1, 'test email', 'test name', 'Android Developer', 'full time', 'test address', 'Jakarta', 'Arkademy', 'no pic', 'sedang mengikuti bootcamp', '2020-09-21 11:25:42', '2020-09-21 11:25:42'),
+(17, 2, 2, 2, 'test presentasi', 'test presentasi', 'Android Developer', 'full time', 'test address', 'Jakarta', 'Arkademy', 'no pic', 'sedang mengikuti bootcamp', '2020-09-24 23:00:52', '2020-09-24 23:00:52'),
+(18, 2, 2, 2, 'test presentasi', 'test presentasi', 'Android Developer', 'full time', 'test address', 'Jakarta', 'Arkademy', 'image-1601202826925.png', 'undefined', '2020-09-27 17:33:46', '2020-09-27 17:33:46');
 
 -- --------------------------------------------------------
 
@@ -234,7 +236,7 @@ CREATE TABLE `project_recruiter` (
   `project_description` text NOT NULL,
   `project_start_date` date NOT NULL,
   `project_end_date` date NOT NULL,
-  `project_image` varchar(100) NOT NULL,
+  `project_image` text NOT NULL,
   `repository_link` varchar(100) NOT NULL,
   `id_skill` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -247,7 +249,9 @@ CREATE TABLE `project_recruiter` (
 
 INSERT INTO `project_recruiter` (`id_project_recruiter`, `project_name`, `project_description`, `project_start_date`, `project_end_date`, `project_image`, `repository_link`, `id_skill`, `created_at`, `updated_at`) VALUES
 (1, 'project backup data mobile application', 'membuat aplikasi android yang akan membackup data secara cloud', '2020-09-20', '2020-09-29', 'https://icons.iconarchive.com/icons/whyred/dsquared-bin/128/trash-yellow-full-icon.png', 'https://github.com/wahyuKurniawaan', 1, '2020-09-20 00:49:54', '2020-09-20 00:49:54'),
-(2, 'test patch', 'test patch', '0000-00-00', '0000-00-00', 'test patch', 'test patch', 2, '2020-09-20 00:50:58', '2020-09-20 00:50:58');
+(2, 'test patch', 'test patch', '0000-00-00', '0000-00-00', 'test patch', 'test patch', 2, '2020-09-20 00:50:58', '2020-09-20 00:50:58'),
+(32, 'project game android peperangan', 'membuat aplikasi game android dengan tema first person shooting war', '2020-09-20', '2020-09-29', 'image-1601034555025.png', 'https://github.com/wahyuKurniawaan', 1, '2020-09-25 18:49:15', '2020-09-25 18:49:15'),
+(33, 'project game android peperangan', 'membuat aplikasi game android dengan tema first person shooting war', '2020-09-20', '2020-09-29', 'image-1601038762068.png', 'https://github.com/wahyuKurniawaan', 1, '2020-09-25 19:59:22', '2020-09-25 19:59:22');
 
 -- --------------------------------------------------------
 
@@ -287,10 +291,10 @@ CREATE TABLE `user` (
   `user_name` varchar(100) NOT NULL,
   `user_email` varchar(50) NOT NULL,
   `user_password` text NOT NULL,
-  `user_role` int(1) NOT NULL,
-  `user_status` int(1) NOT NULL,
+  `user_role` enum('job seeker','recruiter','admin') NOT NULL,
+  `user_status` enum('not active','activated') NOT NULL DEFAULT 'not active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -298,18 +302,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_role`, `user_status`, `created_at`, `updated_at`) VALUES
-(1, 'name1', 'email1', 'password1', 1, 0, '2020-09-23 08:31:07', '2020-09-23 08:31:07'),
-(2, 'name2', 'email2', 'password', 1, 0, '2020-09-23 08:31:25', '2020-09-23 08:31:25'),
-(3, 'name3', 'email3', 'password', 1, 0, '2020-09-23 08:43:44', '2020-09-23 08:43:44'),
-(4, 'name4', 'email4', 'password', 1, 0, '2020-09-23 08:47:09', '2020-09-23 08:47:09'),
-(5, 'name5', 'email5', 'password', 1, 0, '2020-09-23 08:51:18', '2020-09-23 08:51:18'),
-(6, 'name6', 'email6', 'password', 1, 0, '2020-09-23 08:51:39', '2020-09-23 08:51:39'),
-(7, 'name7', 'email7', 'password', 1, 0, '2020-09-23 08:53:23', '2020-09-23 08:53:23'),
-(8, 'name8', 'email8', 'password', 1, 0, '2020-09-23 09:20:08', '2020-09-23 09:20:08'),
-(9, 'name9', 'email9', 'password', 1, 0, '2020-09-23 09:20:33', '2020-09-23 09:20:33'),
-(10, 'name10', 'email10', '$2a$10$9zBJwa21t0b2e5Ww1qFNB.9QSj845Pn7bvUEiNf/pVXA1NLHSScrS', 1, 0, '2020-09-23 09:25:46', '2020-09-23 09:25:46'),
-(11, 'name11', 'email11', '$2a$10$BwdVDctdIN3t2upMWwmTKuiqqUZPKO6o7Bsa3a1QxRFsoyMUsOahy', 1, 0, '2020-09-23 09:28:03', '2020-09-23 09:28:03'),
-(12, 'name12', 'email12', '$2a$10$AKTJfFwVi3MAjPzQ3.x3dugPOZXYmyMFWkQ7VUG7OEdeOWVeVxRrK', 1, 0, '2020-09-23 13:05:30', '2020-09-23 13:05:30');
+(1, 'Wahyu Kurniawan', 'wahyukurniawaan@gmail.com', '$2a$10$3NqABM9lyV5dJOCRYucglOmkHYyEIAfimvfsa3.c7d7D9//8KQyiG', 'admin', 'activated', '2020-09-23 08:31:07', '2020-09-26 17:47:59'),
+(2, 'Job Seeker Dummy', 'jobseeker@dummy.com', '$2a$10$f0N8G.QxYoZxhEdxKYKIruwvukuUPneU5Y7PzUJwp0JByRgdYYnqW', 'job seeker', 'activated', '2020-09-23 08:31:25', '2020-09-27 08:54:10'),
+(3, 'Recruiter Dummy', 'recruiter@dummy.com', '$2a$10$mXgmSCf145JR8YPnoHEQ7.cJL7Vgs9mgCwGkzknVrjhudY7N6sZqS', 'recruiter', 'activated', '2020-09-23 08:43:44', '2020-09-27 08:53:32');
 
 -- --------------------------------------------------------
 
@@ -410,7 +405,7 @@ ALTER TABLE `work_exp_job_seeker`
 -- AUTO_INCREMENT for table `account_job_seeker`
 --
 ALTER TABLE `account_job_seeker`
-  MODIFY `id_account_job_seeker` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_account_job_seeker` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `account_recruiter`
@@ -422,13 +417,13 @@ ALTER TABLE `account_recruiter`
 -- AUTO_INCREMENT for table `portofolio_job_seeker`
 --
 ALTER TABLE `portofolio_job_seeker`
-  MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `profile_job_seeker`
 --
 ALTER TABLE `profile_job_seeker`
-  MODIFY `id_profile_job_seeker` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_profile_job_seeker` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `profile_recruiter`
@@ -446,7 +441,7 @@ ALTER TABLE `project_job_seeker`
 -- AUTO_INCREMENT for table `project_recruiter`
 --
 ALTER TABLE `project_recruiter`
-  MODIFY `id_project_recruiter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_project_recruiter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `skill`
@@ -458,7 +453,7 @@ ALTER TABLE `skill`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `work_exp_job_seeker`

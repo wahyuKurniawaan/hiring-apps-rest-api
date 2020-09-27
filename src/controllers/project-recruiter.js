@@ -24,7 +24,6 @@ module.exports = {
     const offset = (page - 1) * limit
     getProjectRecruiterDataModel(searchKey, searchValue, limit, offset, result => {
       if (result.length) {
-        console.log(result)
         res.send({
           success: true,
           message: 'list project recruiter',
@@ -62,7 +61,6 @@ module.exports = {
     if (name.trim() && description.trim() && startDate.trim() && endDate.trim() &&
     repoLink.trim() && idSkill.trim()) {
       createProjectRecruiterDataModel([name, description, startDate, endDate, repoLink, idSkill], image, result => {
-        console.log(req.file)
         res.send({
           success: true,
           message: 'project has been created',

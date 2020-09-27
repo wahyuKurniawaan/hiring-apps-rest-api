@@ -10,7 +10,7 @@ const {
 const { authorizationJobSeeker } = require('../middleware/authorization')
 
 const router = Router()
- 
+
 router.get('/', authorizationJobSeeker, getAccountJobSeekerData)
 router.get('/:id', authorizationJobSeeker, getAccountJobSeekerDataById)
 router.post('/', authorizationJobSeeker, createAccountJobSeekerData)

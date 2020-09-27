@@ -69,10 +69,10 @@ module.exports = {
       address,
       city,
       workplace,
-      image,
       description
     } = req.body
-    if (email && fullName && jobTitle && statusJob && city && workplace && image) {
+    const image = req.file === 'undefined' ? '' : req.file.filename
+    if (email && fullName && jobTitle && statusJob && city && workplace) {
       createProfileJobSeekerDataModel([
         idAccount,
         idPortofolio,
@@ -84,9 +84,8 @@ module.exports = {
         address,
         city,
         workplace,
-        image,
         description
-      ], result => {
+      ], image, result => {
         console.log(result)
         res.send({
           success: true,

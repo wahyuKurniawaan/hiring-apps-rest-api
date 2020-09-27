@@ -7,13 +7,14 @@ const {
   patchPortofolioJobSeekerData,
   getPortofolioJobSeekerDataById
 } = require('../controllers/portofolio_job_seeker')
+const { authorizationJobSeeker } = require('../middleware/authorization')
 
 const router = Router()
 
-router.get('/', getPortofolioJobSeekerData)
-router.get('/:id', getPortofolioJobSeekerDataById)
-router.post('/', createPortofolioJobSeekerData)
-router.put('/:id', putPortofolioJobSeekerData)
-router.delete('/:id', deletePortofolioJobSeekerData)
-router.patch('/:id', patchPortofolioJobSeekerData)
+router.get('/', authorizationJobSeeker, getPortofolioJobSeekerData)
+router.get('/:id', authorizationJobSeeker, getPortofolioJobSeekerDataById)
+router.post('/', authorizationJobSeeker, createPortofolioJobSeekerData)
+router.put('/:id', authorizationJobSeeker, putPortofolioJobSeekerData)
+router.delete('/:id', authorizationJobSeeker, deletePortofolioJobSeekerData)
+router.patch('/:id', authorizationJobSeeker, patchPortofolioJobSeekerData)
 module.exports = router

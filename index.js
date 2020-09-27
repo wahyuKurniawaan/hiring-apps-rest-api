@@ -30,9 +30,13 @@ app.use('/work-exp-job-seeker', workExpJobSeeker)
 
 app.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*')
-  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept', 'Authorization')
+  response.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+    'Authorization')
   next()
 })
+
 app.listen(process.env.PORT, () => {
   console.log('Listening to port 8080!')
 })

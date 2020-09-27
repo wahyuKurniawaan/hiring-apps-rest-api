@@ -7,13 +7,14 @@ const {
   patchWorkExpJobSeekerData,
   getWorkExpJobSeekerDataById
 } = require('../controllers/work-exp-job-seeker')
+const { authorizationJobSeeker } = require('../middleware/authorization')
 
 const router = Router()
 
-router.get('/', getWorkExpJobSeekerData)
-router.get('/:id', getWorkExpJobSeekerDataById)
-router.post('/', createWorkExpJobSeekerData)
-router.put('/:id', putWorkExpJobSeekerData)
-router.delete('/:id', deleteWorkExpJobSeekerData)
-router.patch('/:id', patchWorkExpJobSeekerData)
+router.get('/', authorizationJobSeeker, getWorkExpJobSeekerData)
+router.get('/:id', authorizationJobSeeker, getWorkExpJobSeekerDataById)
+router.post('/', authorizationJobSeeker, createWorkExpJobSeekerData)
+router.put('/:id', authorizationJobSeeker, putWorkExpJobSeekerData)
+router.delete('/:id', authorizationJobSeeker, deleteWorkExpJobSeekerData)
+router.patch('/:id', authorizationJobSeeker, patchWorkExpJobSeekerData)
 module.exports = router
