@@ -71,7 +71,7 @@ module.exports = {
       workplace,
       description
     } = req.body
-    const image = req.file === 'undefined' ? '' : req.file.filename
+    const image = typeof req.file === 'undefined' ? '' : req.file.filename
     if (email && fullName && jobTitle && statusJob && city && workplace) {
       createProfileJobSeekerDataModel([
         idAccount,
@@ -112,52 +112,57 @@ module.exports = {
       address,
       city,
       workplace,
-      image,
       description
     } = req.body
     const id = req.params.id
-    console.log(req.params)
-    if (email.trim() && fullName.trim() && jobTitle.trim() && statusJob.trim() && city.trim() &&
-    workplace.trim() && image.trim()) {
-      getProfileJobSeekerDataByIdModel(id, result => {
-        if (result.length) {
-          putProfileJobSeekerDataModel(id, [
-            idAccount,
-            idPortofolio,
-            idSkill,
-            email,
-            fullName,
-            jobTitle,
-            statusJob,
-            address,
-            city,
-            workplace,
-            image,
-            description
-          ], result => {
-            if (result.affectedRows) {
-              res.send({
-                success: true,
-                message: `profile with id ${id} has been updated`
-              })
-            } else {
-              res.send({
-                success: false,
-                message: 'failed to update data'
-              })
-            }
-          })
-        } else {
-          res.send({
-            success: false,
-            message: `profile with id ${id} is not found!`
-          })
-        }
-      })
+    const image = req.file.filename
+    if (typeof image !== 'undefined') {
+      if (email.trim() && fullName.trim() && jobTitle.trim() && statusJob.trim() && city.trim() &&
+      workplace.trim()) {
+        getProfileJobSeekerDataByIdModel(id, result => {
+          if (result.length) {
+            putProfileJobSeekerDataModel(id, [
+              idAccount,
+              idPortofolio,
+              idSkill,
+              email,
+              fullName,
+              jobTitle,
+              statusJob,
+              address,
+              city,
+              workplace,
+              description
+            ], image, result => {
+              if (result.affectedRows) {
+                res.send({
+                  success: true,
+                  message: `profile with id ${id} has been updated`
+                })
+              } else {
+                res.send({
+                  success: false,
+                  message: 'failed to update data'
+                })
+              }
+            })
+          } else {
+            res.send({
+              success: false,
+              message: `profile with id ${id} is not found!`
+            })
+          }
+        })
+      } else {
+        res.send({
+          success: false,
+          message: 'All field must be filled!'
+        })
+      }
     } else {
       res.send({
         success: false,
-        message: 'All field must be filled!'
+        message: 'File image not found!'
       })
     }
   },

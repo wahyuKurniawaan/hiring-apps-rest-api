@@ -44,13 +44,15 @@ module.exports = {
     })
   },
   getUserDataModel: (searchKey, searchValue, limit, offset, callBack) => {
-    db.query(`SELECT * FROM user WHERE ${searchKey} LIKE '%${searchValue}%' 
+    db.query(`SELECT user_id, user_name, user_email, user_role, user_status, created_at, updated_at
+    FROM user WHERE ${searchKey} LIKE '%${searchValue}%' 
     LIMIT ${limit} OFFSET ${offset}`, (err, result, fields) => {
       !err ? callBack(result) : callBack(err)
     })
   },
   getUserDataByIdModel: (id, callBack) => {
-    db.query(`SELECT * FROM user WHERE user_id = '${id}'`, (err, result, field) => {
+    db.query(`SELECT user_id, user_name, user_email, user_role, user_status, created_at, updated_at
+    FROM user WHERE user_id = '${id}'`, (err, result, field) => {
       !err ? callBack(result) : callBack(err)
     })
   },

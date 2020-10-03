@@ -32,7 +32,7 @@ module.exports = {
       !err ? callBack(result) : callBack(err)
     })
   },
-  putProfileJobSeekerDataModel: (id, data, callBack) => {
+  putProfileJobSeekerDataModel: (id, data, image, callBack) => {
     db.query(`UPDATE profile_job_seeker SET 
     id_account_job_seeker = '${data[0]}',
     id_portofolio_job_seeker = '${data[1]}', 
@@ -44,9 +44,10 @@ module.exports = {
     address = '${data[7]}',
     city = '${data[8]}',
     workplace = '${data[9]}',
-    image = '${data[10]}',
-    description = '${data[11]}'
-    WHERE id_profile_job_seeker = ${id}`, (err, result, fields) => {
+    image = '${image}',
+    description = '${data[10]}',
+    updated_at = ?
+    WHERE id_profile_job_seeker = ${id}`, new Date(), (err, result, fields) => {
       !err ? callBack(result) : callBack(err)
     })
   },

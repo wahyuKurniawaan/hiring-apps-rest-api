@@ -15,6 +15,8 @@ const skill = require('./src/routes/skill')
 const workExpJobSeeker = require('./src/routes/work-exp-job-seeker')
 const user = require('./src/routes/user')
 
+app.use('/uploads', express.static('./uploads'))
+
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/project', projectRouter)

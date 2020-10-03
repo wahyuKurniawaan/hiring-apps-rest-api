@@ -77,7 +77,6 @@ module.exports = {
     try {
       const { user_email, user_password } = request.body
       const checkDataUser = await checkDataUserModel(user_email)
-      console.log(checkDataUser)
       if (user_email.trim() && user_password.trim()) {
         if (checkDataUser.length > 0) {
           const checkPassword = bcrypt.compareSync(user_password, checkDataUser[0].user_password)
@@ -195,7 +194,6 @@ module.exports = {
                   message: `user with id ${id} has been updated`
                 })
               } else {
-                console.log(result)
                 res.send({
                   success: false,
                   message: 'failed to update data'

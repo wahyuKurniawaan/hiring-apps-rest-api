@@ -6,7 +6,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-v.12.13-green.svg?style=rounded-square)](https://nodejs.org/)
 
 > [My Server Cloud](http://34.234.66.114:8080/)  
-[My ERD / Flowchart ][erd/flowchart]
+  [My ERD / Flowchart ][erd/flowchart]
 
 ## Table Postman Request :
 * Registrasi User:

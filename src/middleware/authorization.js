@@ -14,7 +14,6 @@ module.exports = {
             message: error.message
           })
         } else {
-          console.log(result)
           if (result.user_role === 'job seeker' || result.user_role === 'admin') {
             next()
           } else {
@@ -45,7 +44,6 @@ module.exports = {
             message: error.message
           })
         } else {
-          console.log(result)
           if (result.user_role === 'recruiter' || result.user_role === 'admin') {
             next()
           } else {
@@ -76,7 +74,6 @@ module.exports = {
             message: error.message
           })
         } else {
-          console.log(result)
           if (result.user_role === 'admin') {
             next()
           } else {
