@@ -2,7 +2,7 @@ const db = require('../helper/db')
 module.exports = {
 
   getDataProjectModel: (searchKey, searchValue, limit, offset, callBack) => {
-    db.query(`SELECT * FROM project WHERE ${searchKey} LIKE '%${searchValue}%' LIMIT ${limit} OFFSET ${offset}`, (err, result, fields) => {
+    db.query(`SELECT * FROM project_job_seeker WHERE ${searchKey} LIKE '%${searchValue}%' LIMIT ${limit} OFFSET ${offset}`, (err, result, fields) => {
       !err ? callBack(result) : callBack(err)
     })
   },
