@@ -44,7 +44,7 @@ app.listen(process.env.PORT, () => {
 })
 app.get('/', (request, response) => {
   response.send({
-     success: true,
-     message: 'Back end server hiring apps wahyu kurniawan' 
+    success: true,
+    message: 'Back end server hiring apps wahyu kurniawan'
   })
 })
