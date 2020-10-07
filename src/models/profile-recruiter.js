@@ -1,8 +1,11 @@
 const db = require('../helper/db')
 module.exports = {
   getProfileRecruiterDataModel: (searchKey, searchValue, limit, offset, callBack) => {
-    db.query(`SELECT * FROM profile_recruiter WHERE ${searchKey} LIKE '%${searchValue}%' 
-    LIMIT ${limit} OFFSET ${offset}`, (err, result, fields) => {
+    db.query(`SELECT id_profile_recruiter, profile_recruiter.user_id, user.user_name, user.user_email, user.user_company,
+    user.role_job, user.phone_number, user.user_role, profile_image, company_field, city, description,
+    instagram, linkedin
+    FROM profile_recruiter INNER JOIN user ON profile_recruiter.user_id=user.user_id
+    WHERE ${searchKey} LIKE '%${searchValue}%' LIMIT ${limit} OFFSET ${offset}`, (err, result, fields) => {
       !err ? callBack(result) : callBack(err)
     })
   },

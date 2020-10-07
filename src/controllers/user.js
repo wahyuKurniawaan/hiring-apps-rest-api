@@ -17,7 +17,9 @@ module.exports = {
       user_name,
       user_email,
       user_password,
-      user_role
+      user_company,
+      role_job,
+      phone_number
     } = request.body
     const salt = bcrypt.genSaltSync()
     const encryptPassword = bcrypt.hashSync(user_password.trim(), salt)
@@ -26,47 +28,36 @@ module.exports = {
       user_name,
       user_email,
       user_password: typeof (user_password) === 'undefined' ? '' : encryptPassword,
-      user_role,
+      user_company,
+      role_job,
+      phone_number,
       user_status: 'not active', // hint = 'not active'   2. 'activated'
+      user_role: 'admin',
       created_at: new Date()
     }
     try {
-      if (user_name && user_email && user_password && user_role) {
-        if (user_password.length >= 6) {
-          if (checkEmail.length > 0) {
-            response.send({
-              success: false,
-              message: 'Email has been registered!'
-            })
-          } else {
-            if (user_role === 'recruiter' || user_role === 'job seeker' || user_role === 'admin') {
-              const result = await postUserModel(setData)
-              response.send({
-                success: true,
-                message: 'Success Register User!',
-                data: result
-              })
-            } else {
-              response.send({
-                success: false,
-                message: 'User role must contain one of this value = recruiter, job seeker, admin'
-              })
-            }
-          }
-        } else {
-          response.send({
+      if (user_name && user_email && user_password && user_company && role_job && phone_number) {
+        if (checkEmail.length > 0) {
+          response.status(403).send({
             success: false,
-            message: 'Password must containt at least 6 characters!'
+            message: 'Email has been registered!'
+          })
+        } else {
+          const result = await postUserModel(setData)
+          response.send({
+            success: true,
+            message: 'Success Register User!',
+            data: result
           })
         }
       } else {
-        response.send({
+        response.status(400).sendStatus({
           success: false,
           message: 'All field must be filled!'
         })
       }
     } catch (error) {
-      response.send({
+      response.status(400).send({
         success: false,
         message: 'Bad request!',
         print: console.log('Error = ' + error)
@@ -81,11 +72,17 @@ module.exports = {
         if (checkDataUser.length > 0) {
           const checkPassword = bcrypt.compareSync(user_password, checkDataUser[0].user_password)
           if (checkPassword) {
-            const { user_id, user_name, user_email, user_role, user_status } = checkDataUser[0]
+            const {
+              user_id, user_name, user_email, user_company, user_status, role_job, phone_number,
+              user_role
+            } = checkDataUser[0]
             let payload = {
               user_id,
               user_name,
               user_email,
+              user_company,
+              role_job,
+              phone_number,
               user_role,
               user_status // hint = 'not active'   2. 'activated'
             }
@@ -93,31 +90,31 @@ module.exports = {
             payload = { ...payload, tokenLogin }
             response.send({
               success: true,
-              message: `successfully logged in as a ${user_role} !`,
+              message: `successfully logged in as ${user_role} !`,
               data: payload
             })
             console.log('Berhasil Login!')
           } else {
-            response.send({
+            response.status(400).send({
               success: false,
               message: 'Incorrect password!'
             })
           }
         } else {
-          response.send({
+          response.status(404).send({
             success: false,
             message: 'Email is not registered!'
           })
         }
       } else {
-        response.send({
+        response.status(400).send({
           success: false,
           message: 'All field must be filled!'
         })
       }
     } catch (error) {
       console.log(error)
-      response.send({
+      response.status(400).send({
         success: false,
         message: 'Bad request!'
       })
@@ -175,18 +172,18 @@ module.exports = {
       user_name,
       user_email,
       user_password,
-      user_role,
+      user_company,
       user_status
     } = req.body
     const salt = bcrypt.genSaltSync()
     const encryptPassword = bcrypt.hashSync(user_password.trim(), salt)
     const id = req.params.id
-    if (user_name.trim() && user_email.trim() && user_password.trim() && user_role.trim() &&
+    if (user_name.trim() && user_email.trim() && user_password.trim() && user_company.trim() &&
     user_status.trim()) {
       getUserDataByIdModel(id, result => {
         if (result.length) {
           const setDate = new Date().toISOString().slice(0, 19).replace('T', ' ')
-          putUserDataModel(id, [user_name, user_email, encryptPassword, user_role, user_status, setDate],
+          putUserDataModel(id, [user_name, user_email, encryptPassword, user_company, user_status, setDate],
             result => {
               if (result.affectedRows) {
                 res.send({

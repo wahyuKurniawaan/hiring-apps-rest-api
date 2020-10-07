@@ -20,8 +20,8 @@ module.exports = {
   },
   checkDataUserModel: (email) => {
     return new Promise((resolve, reject) => {
-      db.query(`SELECT user_id, user_email, user_password, user_name, user_role, user_status 
-      FROM user WHERE user_email = ?`, email, (error, result) => {
+      db.query(`SELECT user_id, user_email, user_password, user_name, user_company, role_job, phone_number,
+      user_role, user_status FROM user WHERE user_email = ?`, email, (error, result) => {
         if (!error) {
           resolve(result)
         } else {

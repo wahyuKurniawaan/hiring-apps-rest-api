@@ -48,7 +48,7 @@ module.exports = {
           data: result[0]
         })
       } else {
-        res.send({
+        res.status(404).send({
           success: true,
           message: `Data profile recruiter with id = ${id} was not found!`
         })
