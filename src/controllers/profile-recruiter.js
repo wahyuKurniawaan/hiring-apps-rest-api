@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const {
   getProfileRecruiterDataModel,
   createProfileRecruiterDataModel,
@@ -6,6 +7,8 @@ const {
   patchProfileRecruiterDataModel,
   getProfileRecruiterDataByIdModel
 } = require('../models/profile-recruiter')
+
+const bcrypt = require('bcryptjs')
 
 module.exports = {
   getProfileRecruiterData: (req, res) => {
@@ -56,35 +59,9 @@ module.exports = {
     })
   },
   createProfileRecruiterData: (req, res) => {
-    const {
-      idAccount,
-      email,
-      fullName,
-      jobTitle,
-      linkedin,
-      companyName,
-      companyField,
-      companyAddress,
-      city,
-      description,
-      companyWebsite,
-      companyPhoneNumber
-    } = req.body
-    if (email && fullName && jobTitle && companyName && city && companyField && companyAddress) {
-      createProfileRecruiterDataModel([
-        idAccount,
-        email,
-        fullName,
-        jobTitle,
-        linkedin,
-        companyName,
-        companyField,
-        companyAddress,
-        city,
-        description,
-        companyWebsite,
-        companyPhoneNumber
-      ], result => {
+    const { user_id } = req.body
+    if (user_id) {
+      createProfileRecruiterDataModel(user_id, result => {
         console.log(result)
         res.send({
           success: true,
@@ -101,38 +78,37 @@ module.exports = {
   },
   putProfileRecruiterData: (req, res) => {
     const {
-      idAccount,
-      email,
-      fullName,
-      jobTitle,
-      linkedin,
-      companyName,
-      companyField,
-      companyAddress,
+      company_field,
       city,
       description,
-      companyWebsite,
-      companyPhoneNumber
+      instagram,
+      linkedin,
+      user_name,
+      user_email,
+      user_password,
+      user_company,
+      role_job,
+      phone_number
     } = req.body
     const id = req.params.id
-    console.log(req.params)
-    if (email.trim() && fullName.trim() && jobTitle.trim() && companyName.trim() && city.trim() &&
-    description.trim() && companyWebsite.trim()) {
+    const image = typeof req.file === 'undefined' ? '' : req.file.filename
+    const salt = bcrypt.genSaltSync()
+    const encryptPassword = bcrypt.hashSync(user_password.trim(), salt)
+    if (company_field && city && description && instagram && linkedin) {
       getProfileRecruiterDataByIdModel(id, result => {
         if (result.length) {
-          putProfileRecruiterDataModel(id, [
-            idAccount,
-            email,
-            fullName,
-            jobTitle,
-            linkedin,
-            companyName,
-            companyField,
-            companyAddress,
+          putProfileRecruiterDataModel(id, image, [
+            company_field,
             city,
             description,
-            companyWebsite,
-            companyPhoneNumber
+            instagram,
+            linkedin,
+            user_name,
+            user_email,
+            encryptPassword,
+            user_company,
+            role_job,
+            phone_number
           ], result => {
             if (result.affectedRows) {
               res.send({
@@ -144,6 +120,8 @@ module.exports = {
                 success: false,
                 message: 'failed to update data'
               })
+              console.log(res.body)
+              console.log(result)
             }
           })
         } else {
@@ -158,6 +136,7 @@ module.exports = {
         success: false,
         message: 'All field must be filled!'
       })
+      console.log(res.body)
     }
   },
   deleteProfileRecruiterData: (req, res) => {

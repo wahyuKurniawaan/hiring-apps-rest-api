@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2020 at 04:58 PM
+-- Generation Time: Oct 11, 2020 at 07:49 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -164,12 +164,12 @@ INSERT INTO `profile_job_seeker` (`id_profile_job_seeker`, `id_account_job_seeke
 CREATE TABLE `profile_recruiter` (
   `id_profile_recruiter` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `profile_image` text NOT NULL,
-  `company_field` varchar(100) NOT NULL,
-  `city` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  `instagram` varchar(100) NOT NULL,
-  `linkedin` varchar(100) NOT NULL,
+  `profile_image` text DEFAULT NULL,
+  `company_field` varchar(100) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `instagram` varchar(100) DEFAULT NULL,
+  `linkedin` varchar(100) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -179,8 +179,7 @@ CREATE TABLE `profile_recruiter` (
 --
 
 INSERT INTO `profile_recruiter` (`id_profile_recruiter`, `user_id`, `profile_image`, `company_field`, `city`, `description`, `instagram`, `linkedin`, `created_at`, `updated_at`) VALUES
-(1, 1, 'image-1601793412341.jpg', 'Talent IT Recruiter', 'Indonesia', 'mencari talent mobile application yang siap bekerja', 'https://www.instagram.com/wahyukurniawaan8/', 'https://www.linkedin.com/in/wahyukurniawaan/', '2020-09-19 22:28:56', '2020-09-19 22:28:56'),
-(2, 2, '', 'test patch com field', 'patch city', 'patch description', 'patch website', 'test patch linkedin', '2020-09-19 22:29:22', '2020-09-19 22:29:22');
+(1, 1, 'image-1601787183922.jpg', 'Talent Hunter', 'Jakarta', 'seaching for a great IT talent', 'https://www.instagram.com/wahyukurniawaan8/', 'https://www.linkedin.com/in/wahyukurniawaan/', '2020-10-12 00:45:42', '2020-10-12 00:45:42');
 
 -- --------------------------------------------------------
 
@@ -203,16 +202,12 @@ CREATE TABLE `project_job_seeker` (
 INSERT INTO `project_job_seeker` (`id_project`, `name`, `description`, `price`, `duration`) VALUES
 (1, 'Project beauty camera', 'membuat aplikasi android kamera dengan tambahan fitur efek cantik', 30000000, '5 Month'),
 (2, 'Project Live Control CCTV 24 Hour', 'membuat aplikasi android yang akan mengontrol cctv yang dipasang di rumah melalui android', 50000000, '8 Month'),
-(6, 'Project Dating Apps = Tenten', 'membuat aplikasi android pencari jodoh dengan mempertemukan pasangan bedasarkan lokasi ataupun minat', 10000000, '3 Month'),
-(7, 'Urgent Project pemantauan covid', 'membuat aplikasi android yang berfokus terhadap kondisi pandemik covid-19', 150000000, '2 Month'),
-(9, 'Project Aplikasi android Hiring Jobs', 'membuat aplikasi android yang membantu para pencari kerja ataupun perusahaan yang sedang mencari karyawan', 50000000, '3 Month'),
-(11, 'Aplikasi android Hiring Jobs software engineer', 'membuat aplikasi android yang membantu para pencari kerja dengan sistem per project khusus untuk software engineer', 45000000, '3 Month'),
-(12, 'Project Game Android Peou', 'membuat project game android bernama Peou yang bertemakan seperti tamagochi', 17000000, '10 Month'),
-(14, 'Project Game Android Battle Royale = Penguin arena', 'membuat project game android bernama Penguin arena bertemakan battle royal hingga 50 pemain', 30000000, '12 Month'),
-(16, 'test patch request', 'test patch description', 1000, ' satu tahun'),
-(17, 'test2', 'test2', 2000000, '2 Month'),
-(18, 'test3', 'test3', 2000000, '2 Month'),
-(19, 'test4', 'test4', 4000000, '4 Month');
+(3, 'Project Dating Apps = Tenten', 'membuat aplikasi android pencari jodoh dengan mempertemukan pasangan bedasarkan lokasi ataupun minat', 10000000, '3 Month'),
+(4, 'Urgent Project pemantauan covid', 'membuat aplikasi android yang berfokus terhadap kondisi pandemik covid-19', 150000000, '2 Month'),
+(5, 'Project Aplikasi android Hiring Jobs', 'membuat aplikasi android yang membantu para pencari kerja ataupun perusahaan yang sedang mencari karyawan', 50000000, '3 Month'),
+(6, 'Aplikasi android Hiring Jobs software engineer', 'membuat aplikasi android yang membantu para pencari kerja dengan sistem per project khusus untuk software engineer', 45000000, '3 Month'),
+(7, 'Project Game Android Peou', 'membuat project game android bernama Peou yang bertemakan seperti tamagochi', 17000000, '10 Month'),
+(8, 'Project Game Android Battle Royale = Penguin arena', 'membuat project game android bernama Penguin arena bertemakan battle royal hingga 50 pemain', 30000000, '12 Month');
 
 -- --------------------------------------------------------
 
@@ -295,13 +290,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_company`, `role_job`, `phone_number`, `user_status`, `user_role`, `created_at`, `updated_at`) VALUES
-(1, 'Wahyu Kurniawan', 'wahyukurniawaan@gmail.com', '$2a$10$3NqABM9lyV5dJOCRYucglOmkHYyEIAfimvfsa3.c7d7D9//8KQyiG', 'Arkademy', 'HR recruiter', '089630033462', 'activated', 'admin', '2020-09-23 08:31:07', '2020-09-26 17:47:59'),
-(2, 'Job Seeker Dummy', 'jobseeker@dummy.com', '$2a$10$f0N8G.QxYoZxhEdxKYKIruwvukuUPneU5Y7PzUJwp0JByRgdYYnqW', 'Arkademy', 'HR recruiter', '089630033462', 'activated', 'admin', '2020-09-23 08:31:25', '2020-09-27 08:54:10'),
-(3, 'Recruiter Dummy', 'recruiter@dummy.com', '$2a$10$mXgmSCf145JR8YPnoHEQ7.cJL7Vgs9mgCwGkzknVrjhudY7N6sZqS', 'Arkademy', 'HR recruiter', '089630033462', 'activated', 'admin', '2020-09-23 08:43:44', '2020-09-27 08:53:32'),
-(4, 'budi darmawan', 'budidarmawan@gmail.com', '$2a$10$mcXWAbI.88EGT.N0WG2/pewXVUf6uN62H/.wVzHuVdq54571XNgpK', 'Arkademy', 'HR recruiter', '089630033462', 'not active', 'admin', '2020-09-28 03:30:33', '2020-09-28 03:30:33'),
-(5, 'Ardion Massaid', 'ardionmassaid@gmail.com', '$2a$10$7wqf1TMzmLH6tQiYfI.iEOmk7zc0ThPtgfRApeu/nJ3RIHtuilRzi', 'Arkademy', 'HR recruiter', '089630033462', 'not active', 'admin', '2020-10-02 15:16:56', '2020-10-02 15:16:55'),
-(6, 'Rosyida Widadina', 'rosyida@gmail.com', '$2a$10$vnI6F5PbS61vZLF4Vg1fZOAc.l.4KxU6fJctFpq21cnznNvSFYsLW', 'Arkademy', 'HR recruiter', '089630033462', 'not active', 'admin', '2020-10-02 15:18:22', '2020-10-02 15:18:21'),
-(7, 'Muhammad Rizki', 'muhammadrizki@gmail.com', '$2a$10$TV8CF3B2Yjf4QCaGJET6G.go2ZSQiC6fDvub2MAu4z5WeuDmROSmO', 'Arkademy', 'Talent Recruiter', '089630033462', 'not active', 'admin', '2020-10-07 09:03:51', '2020-10-07 16:03:51');
+(1, 'Wahyu Kurniawan', 'wahyukurniawaan@gmail.com', '$2a$10$4qmbyxsonukhx4TmAY9eF.VJcec8RRLYET/z0GpPBDBZfBWOur2y.', 'Arkademy', 'Talent Recruiter', '089630033462', 'not active', 'admin', '2020-10-11 17:41:40', '2020-10-12 00:41:40');
 
 -- --------------------------------------------------------
 
@@ -426,13 +415,13 @@ ALTER TABLE `profile_job_seeker`
 -- AUTO_INCREMENT for table `profile_recruiter`
 --
 ALTER TABLE `profile_recruiter`
-  MODIFY `id_profile_recruiter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_profile_recruiter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `project_job_seeker`
 --
 ALTER TABLE `project_job_seeker`
-  MODIFY `id_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `project_recruiter`
@@ -450,7 +439,7 @@ ALTER TABLE `skill`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `work_exp_job_seeker`
