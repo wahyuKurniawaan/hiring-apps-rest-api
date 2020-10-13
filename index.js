@@ -14,6 +14,7 @@ const projectRecruiter = require('./src/routes/project-recruiter')
 const skill = require('./src/routes/skill')
 const workExpJobSeeker = require('./src/routes/work-exp-job-seeker')
 const user = require('./src/routes/user')
+const offer = require('./src/routes/offers')
 
 app.use('/uploads', express.static('./uploads'))
 
@@ -29,6 +30,7 @@ app.use('/profile-recruiter', profileRecruiter)
 app.use('/project-recruiter', projectRecruiter)
 app.use('/skill', skill)
 app.use('/work-exp-job-seeker', workExpJobSeeker)
+app.use('/offers', offer)
 
 app.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*')

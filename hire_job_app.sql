@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2020 at 07:49 PM
+-- Generation Time: Oct 13, 2020 at 02:00 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -94,6 +94,18 @@ INSERT INTO `account_recruiter` (`id_account_recruiter`, `email`, `full_name`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `offer`
+--
+
+CREATE TABLE `offer` (
+  `id_offer` int(11) NOT NULL,
+  `id_profile_job_seeker` int(11) NOT NULL,
+  `id_project` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `portofolio_job_seeker`
 --
 
@@ -127,7 +139,7 @@ CREATE TABLE `profile_job_seeker` (
   `id_profile_job_seeker` int(11) NOT NULL,
   `id_account_job_seeker` int(11) NOT NULL,
   `id_portofolio_job_seeker` int(11) NOT NULL,
-  `id_skill` int(11) NOT NULL,
+  `skill` text NOT NULL,
   `email` varchar(100) NOT NULL,
   `full_name` varchar(200) NOT NULL,
   `job_title` varchar(100) NOT NULL,
@@ -145,15 +157,15 @@ CREATE TABLE `profile_job_seeker` (
 -- Dumping data for table `profile_job_seeker`
 --
 
-INSERT INTO `profile_job_seeker` (`id_profile_job_seeker`, `id_account_job_seeker`, `id_portofolio_job_seeker`, `id_skill`, `email`, `full_name`, `job_title`, `status_job`, `address`, `city`, `workplace`, `image`, `description`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 'wahyukurniawaan@gmail.com', 'Wahyu Kurniawan', 'Android Developer', 'full time', 'tanjung barat, jagakarsa', 'DKI Jakarta', 'Arkademy', 'image-1601793412341.jpg', 'sedang mengikuti bootcamp arkademy', '2020-09-19 20:00:10', '2020-10-04 06:36:54'),
-(4, 2, 2, 2, 'budidarmawan@gmail.com', 'Budi Darmawan', 'Web Developer', 'freelancer', 'Balik papan', 'Kalimantan Timur', 'Arkademy', 'image-1601793845103.jpg', 'sedang mengikuti bootcamp arkademy', '2020-09-20 19:23:55', '2020-10-04 06:44:06'),
-(5, 2, 2, 2, 'ardionmassaid@gmail.com', 'Ardion Massaid', 'Web Developer', 'full time', 'Airlangga', 'Surabaya', 'Arkademy', 'image-1601794138107.jpg', 'sedang mengikuti bootcamp arkademy', '2020-09-20 19:25:28', '2020-10-04 06:49:00'),
-(6, 5, 5, 4, 'ilhamaliyuddin@gmail.com', 'Ilham Aliyuddin', 'Android Developer', 'freelancer', 'Bandung', 'Jawa Barat', 'Arkademy', 'image-1601794538980.jpg', 'sedang mengikuti bootcamp arkademy', '2020-09-20 19:26:51', '2020-10-04 06:55:40'),
-(7, 6, 6, 5, 'khairulichsan@gmail.com', 'Khairul Ichsan', 'Web Developer', 'full time', 'Pontianak', 'Kalimantan Barat', 'Arkademy', 'image-1601794747852.jpg', 'sedang mengikuti bootcamp arkademy', '2020-09-20 19:28:15', '2020-10-04 06:59:09'),
-(8, 7, 7, 6, 'muhammadrizki@gmail.com', 'Muhammad Rizki', 'Android Developer', 'freelancer', 'Jakarta Selatan', 'DKI Jakarta', 'Arkademy', 'image-1601794854952.jpg', 'sedang mengikuti bootcamp arkademy', '2020-09-20 19:28:45', '2020-10-04 07:00:56'),
-(9, 8, 8, 7, 'reihanbayzaki@gmail.com', 'Reihan Bayzaki Bagus Mahdy', 'Web Developer', 'full time', 'Banyumas', 'Jawa Tengah', 'Arkademy', 'image-1601795018080.jpg', 'sedang mengikuti bootcamp arkademy', '2020-09-20 19:29:44', '2020-10-04 07:03:39'),
-(10, 9, 9, 8, 'rosyidawidadina@gmail.com', 'Rosyida Widadina Ulya', 'Android Developer', 'freelancer', 'Surabaya', 'Jawa Timur', 'Arkademy', 'image-1601795104651.jpg', 'sedang mengikuti bootcamp arkademy', '2020-09-20 19:30:07', '2020-10-04 07:05:06');
+INSERT INTO `profile_job_seeker` (`id_profile_job_seeker`, `id_account_job_seeker`, `id_portofolio_job_seeker`, `skill`, `email`, `full_name`, `job_title`, `status_job`, `address`, `city`, `workplace`, `image`, `description`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'kotlin,SQL,NodeJS', 'wahyukurniawaan@gmail.com', 'Wahyu Kurniawan', 'Android Developer', 'full time', 'tanjung barat, jagakarsa', 'DKI Jakarta', 'Arkademy', 'image-1601793412341.jpg', 'Saya orang yang fleksibel, bisa beradaptasi terhadap lingkungan kerja yang berbeda. Dan juga terbiasa bekerja di dalam tekanan dengan berbeda pekerjaan bedasarkan dengan pengalaman kerja saya jalani selama ini.\r\n\r\nSaya tertarik untuk belajar bahasa pemrograman dan mencoba belajar Java dengan menyelesaikan course yang tersedia di berbagai website di internet. Setelah itu saya memutuskan untuk belajar lebih dalam dengan mengikuti bootcamp yang disediakan oleh Arkademy. Saya banyak belajar tentang apa yang harus dibutuhkan sebagai seorang android developer dan mendapatkan pengalaman untuk membuat dan mengembangkan aplikasi android dengan kotlin dan dengan node.js sebagai back-end nya.', '2020-09-19 20:00:10', '2020-10-04 06:36:54'),
+(4, 2, 2, 'JavaScript,SQL,NodeJs', 'budidarmawan@gmail.com', 'Budi Darmawan', 'Web Developer', 'freelancer', 'Balik papan', 'Kalimantan Timur', 'Arkademy', 'image-1601793845103.jpg', 'Saya merupakan lulusan S1 Matematika yang sangat tertarik dengan teknologi, sehingga semasa kuliah saya belajar beberapa bahasa pemrograman. Setelah selesai kuliah saya mulai fokus belajar mengenai pengembangan aplikasi android, sehingga saya mengikuti program bootcamp Arkademy Tech Academy untuk menjadi Android Developer profesional.\r\n\r\nSaya juga belajar di salah satu platform teknologi yang terkenal di Indonesia yaitu Dicoding Indonesia, untuk membantu peningkatan hard skill dan semoga kedepannya bisa mendapatkan sertifikasi dari Google yaitu Associate Android Developer.\r\n\r\nTechnical Skill :\r\n• Languages: Kotlin, Node.JS, Python, Javascript\r\n• Frameworks: Express.JS\r\n• Database: SQL {MySQL}\r\n• Other: Git, Amazaon AWS, Android Studio, HTML, CSS ', '2020-09-20 19:23:55', '2020-10-04 06:44:06'),
+(5, 2, 2, 'JavaScript,SQL,NodeJs', 'ardionmassaid@gmail.com', 'Ardion Massaid', 'Web Developer', 'full time', 'Airlangga', 'Surabaya', 'Arkademy', 'image-1601794138107.jpg', 'Since I was little, I have a great interest in technology, from elementary school I like to use Google just to search for games, or to create a Facebook account. after junior high school i liked to learn microsoft excel and all its programs. after high school I studied Pascal programming and participated in the computer olympiad. And when I was in college I learned other programming languages such as R, Phiton, C ++. and after I graduated I wanted to learn how to make Android applications. Finally, I found Arkademy which was a place for me to learn and become a professional Android Developer because programming is my passion. ', '2020-09-20 19:25:28', '2020-10-04 06:49:00'),
+(6, 5, 5, 'kotlin,SQL,NodeJS', 'ilhamaliyuddin@gmail.com', 'Ilham Aliyuddin', 'Android Developer', 'freelancer', 'Bandung', 'Jawa Barat', 'Arkademy', 'image-1601794538980.jpg', 'sedang mengikuti bootcamp arkademy', '2020-09-20 19:26:51', '2020-10-04 06:55:40'),
+(7, 6, 6, 'JavaScript,SQL,NodeJs', 'khairulichsan@gmail.com', 'Khairul Ichsan', 'Web Developer', 'full time', 'Pontianak', 'Kalimantan Barat', 'Arkademy', 'image-1601794747852.jpg', 'Saya seorang Android Developer yang mempunyai semangat yang kuat untuk mempelajari hal-hal baru, mengedepankan fakta, inventif, dan juga mempunyai motivasi yang tinggi, yaitu Gain Knowledge, Try Something New, Build a Plan, Law of Attraction.\r\n\r\nLatar belakang pendidikan saya adalah lulusan SMK jurusan RPL yang mempelajari pemrograman web menggunakan framework Laravel dan juga mempelajari aplikasi desktop menggunakan VB.Net.\r\n\r\nDengan segala bidang keahlian yang telah saya punya selama di SMK tidak menutup kemungkinan untuk saya mempelajari hal baru. Oleh karena itu saya memutuskan untuk mengikuti Bootcamp Arkademy sebagai Android Developer karena ingin mendalami lebih dalam tentang Android dan menjadi Android Developer Profesional.\r\n\r\nTechnical Skill\r\nLanguages : Kotlin, Javascript, node.js, php, VB.Net\r\nFramework : Express js, Laravel, .Net\r\nDatabase : MySQL\r\nOther : Git, Android Studio, AWS ', '2020-09-20 19:28:15', '2020-10-04 06:59:09'),
+(8, 7, 7, 'kotlin,SQL,NodeJS', 'muhammadrizki@gmail.com', 'Muhammad Rizki', 'Android Developer', 'freelancer', 'Jakarta Selatan', 'DKI Jakarta', 'Arkademy', 'image-1601794854952.jpg', 'I have a \'Grit\' in technology, the first job I got at a technology service company called Visionet Data International as an IT Support. There I was required to always learn new things about technology because of the many collaborative projects between many parties. Besides that, there I was also required to be professional in providing services to corporate clients, in this case solving problems encountered by clients. The 5 years I worked and studied there made me make the decision to get out of my comfort zone and develop myself again.\r\n\r\nThen I decided to move from becoming an IT Support and planning to become an Android Developer. After I decided to stop working, I focused on learning independently and regularly about the world of technology, in this case being an Android Developer. For 1 year of studying independently and already having enough basic understanding, I finally decided to join the Arkademy Bootcamp.', '2020-09-20 19:28:45', '2020-10-04 07:00:56'),
+(9, 8, 8, 'JavaScript,SQL,NodeJs', 'reihanbayzaki@gmail.com', 'Reihan Bayzaki Bagus Mahdy', 'Web Developer', 'full time', 'Banyumas', 'Jawa Tengah', 'Arkademy', 'image-1601795018080.jpg', 'Saya seorang yang terencana, mempunyai tekad/motivasi, dan ambisi. Karena hal itu saya suka menantang diri untuk mencari pengalaman baru, menemukan relasi teman baru, dan beradaptasi dengan lingkungan baru\r\n\r\nDengan latar belakang dari SMK Telkom Purwokerto , Rekayasa Perangkat Lunak. Saya memutuskan untuk mengikuti Program Bootcamp dengan pembelajaran intensif di Arkademy yang memberikan saya gambaran tentang apa yang saya dapat lakukan dalam dunia pemrograman di bidang Android Developer. Saya juga mendapat kesempatan untuk merancang dan mengembangakan Aplikasi Android dengan menggunakan Android Studio Kotlin. Secara umumnya, saya orang yang terencana dan suka dengan hal yang membuat berkembang terkait dunia pemrograman.\r\n\r\nTECHNICAL SKILLS:\r\n- Language: Kotlin\r\n- Tools : Android Studio\r\n- Database : MySql (phpMyAdmin)\r\n- Others: Git, AWS ', '2020-09-20 19:29:44', '2020-10-04 07:03:39'),
+(10, 9, 9, 'kotlin,SQL,NodeJS', 'rosyidawidadina@gmail.com', 'Rosyida Widadina Ulya', 'Android Developer', 'freelancer', 'Surabaya', 'Jawa Timur', 'Arkademy', 'image-1601795104651.jpg', 'An adaptive, detailed, passionate, and always willing to learn. I have high motivation to pursue something that I have decided.\r\n\r\nHas organizational experience from elementary school to college and is able to work in teams and individually.\r\n\r\nI have a statistical educational background in college and have several awards in scientific writing competitions and international conferences.\r\n\r\nI enjoy challenging myself to learn new things. Now I am pursuing android development at Bootcamp Arkademy. The decision to pursue android development was because I was interested in developing the android application itself and liked coding since college.\r\n\r\n\r\nBesides that, I have been certified as a data analyst from the professional institution of Airlangga University. I like solving problems and analyzing data. I am very interested in statistical programming.', '2020-09-20 19:30:07', '2020-10-04 07:05:06');
 
 -- --------------------------------------------------------
 
@@ -179,7 +191,8 @@ CREATE TABLE `profile_recruiter` (
 --
 
 INSERT INTO `profile_recruiter` (`id_profile_recruiter`, `user_id`, `profile_image`, `company_field`, `city`, `description`, `instagram`, `linkedin`, `created_at`, `updated_at`) VALUES
-(1, 1, 'image-1601787183922.jpg', 'Talent Hunter', 'Jakarta', 'seaching for a great IT talent', 'https://www.instagram.com/wahyukurniawaan8/', 'https://www.linkedin.com/in/wahyukurniawaan/', '2020-10-12 00:45:42', '2020-10-12 00:45:42');
+(1, 1, 'image-1601787183922.jpg', 'Talent Hunter', 'Jakarta', 'seaching for a great IT talent', 'https://www.instagram.com/wahyukurniawaan8/', 'https://www.linkedin.com/in/wahyukurniawaan/', '2020-10-12 00:45:42', '2020-10-12 00:45:42'),
+(2, 2, NULL, NULL, NULL, NULL, NULL, NULL, '2020-10-12 01:42:33', '2020-10-12 01:42:33');
 
 -- --------------------------------------------------------
 
@@ -290,7 +303,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_company`, `role_job`, `phone_number`, `user_status`, `user_role`, `created_at`, `updated_at`) VALUES
-(1, 'Wahyu Kurniawan', 'wahyukurniawaan@gmail.com', '$2a$10$4qmbyxsonukhx4TmAY9eF.VJcec8RRLYET/z0GpPBDBZfBWOur2y.', 'Arkademy', 'Talent Recruiter', '089630033462', 'not active', 'admin', '2020-10-11 17:41:40', '2020-10-12 00:41:40');
+(1, 'Wahyu Kurniawan', 'wahyukurniawaan@gmail.com', '$2a$10$4qmbyxsonukhx4TmAY9eF.VJcec8RRLYET/z0GpPBDBZfBWOur2y.', 'Arkademy', 'Talent Recruiter', '089630033462', 'not active', 'admin', '2020-10-11 17:41:40', '2020-10-12 00:41:40'),
+(2, 'Wahyu Kurniawan', 'wahyukurniawaan@gmail.coma', '$2a$10$fVaVwDhgaCuE8JPYpi1Y6eDETNHQkptanaT.LQ1yF9HOCGddYvs.u', 'Arkademy', 'Talent Recruiter', '089630033462', 'not active', 'admin', '2020-10-11 18:42:19', '2020-10-12 01:42:19');
 
 -- --------------------------------------------------------
 
@@ -332,6 +346,14 @@ ALTER TABLE `account_job_seeker`
 --
 ALTER TABLE `account_recruiter`
   ADD PRIMARY KEY (`id_account_recruiter`) USING BTREE;
+
+--
+-- Indexes for table `offer`
+--
+ALTER TABLE `offer`
+  ADD PRIMARY KEY (`id_offer`),
+  ADD KEY `constraint_project_id` (`id_project`),
+  ADD KEY `constraint_profile_job_seeker` (`id_profile_job_seeker`);
 
 --
 -- Indexes for table `portofolio_job_seeker`
@@ -400,6 +422,12 @@ ALTER TABLE `account_recruiter`
   MODIFY `id_account_recruiter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `offer`
+--
+ALTER TABLE `offer`
+  MODIFY `id_offer` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `portofolio_job_seeker`
 --
 ALTER TABLE `portofolio_job_seeker`
@@ -415,7 +443,7 @@ ALTER TABLE `profile_job_seeker`
 -- AUTO_INCREMENT for table `profile_recruiter`
 --
 ALTER TABLE `profile_recruiter`
-  MODIFY `id_profile_recruiter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_profile_recruiter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `project_job_seeker`
@@ -439,7 +467,7 @@ ALTER TABLE `skill`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `work_exp_job_seeker`
@@ -450,6 +478,13 @@ ALTER TABLE `work_exp_job_seeker`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `offer`
+--
+ALTER TABLE `offer`
+  ADD CONSTRAINT `constraint_profile_job_seeker` FOREIGN KEY (`id_profile_job_seeker`) REFERENCES `profile_job_seeker` (`id_profile_job_seeker`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `constraint_project_id` FOREIGN KEY (`id_project`) REFERENCES `project_job_seeker` (`id_project`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `profile_job_seeker`
