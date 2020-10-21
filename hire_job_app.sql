@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2020 at 02:00 PM
+-- Generation Time: Oct 21, 2020 at 10:59 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -202,25 +202,27 @@ INSERT INTO `profile_recruiter` (`id_profile_recruiter`, `user_id`, `profile_ima
 
 CREATE TABLE `project_job_seeker` (
   `id_project` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `description` text NOT NULL,
-  `price` int(11) NOT NULL,
-  `duration` varchar(30) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `duration` varchar(30) DEFAULT NULL,
+  `project_image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `project_job_seeker`
 --
 
-INSERT INTO `project_job_seeker` (`id_project`, `name`, `description`, `price`, `duration`) VALUES
-(1, 'Project beauty camera', 'membuat aplikasi android kamera dengan tambahan fitur efek cantik', 30000000, '5 Month'),
-(2, 'Project Live Control CCTV 24 Hour', 'membuat aplikasi android yang akan mengontrol cctv yang dipasang di rumah melalui android', 50000000, '8 Month'),
-(3, 'Project Dating Apps = Tenten', 'membuat aplikasi android pencari jodoh dengan mempertemukan pasangan bedasarkan lokasi ataupun minat', 10000000, '3 Month'),
-(4, 'Urgent Project pemantauan covid', 'membuat aplikasi android yang berfokus terhadap kondisi pandemik covid-19', 150000000, '2 Month'),
-(5, 'Project Aplikasi android Hiring Jobs', 'membuat aplikasi android yang membantu para pencari kerja ataupun perusahaan yang sedang mencari karyawan', 50000000, '3 Month'),
-(6, 'Aplikasi android Hiring Jobs software engineer', 'membuat aplikasi android yang membantu para pencari kerja dengan sistem per project khusus untuk software engineer', 45000000, '3 Month'),
-(7, 'Project Game Android Peou', 'membuat project game android bernama Peou yang bertemakan seperti tamagochi', 17000000, '10 Month'),
-(8, 'Project Game Android Battle Royale = Penguin arena', 'membuat project game android bernama Penguin arena bertemakan battle royal hingga 50 pemain', 30000000, '12 Month');
+INSERT INTO `project_job_seeker` (`id_project`, `user_id`, `name`, `description`, `price`, `duration`, `project_image`) VALUES
+(1, 1, 'Project beauty camera', 'membuat aplikasi android kamera dengan tambahan fitur efek cantik', 30000000, '5 Month', 'image-1603270503425.png'),
+(2, 1, 'Project Live Control CCTV 24 Hour', 'membuat aplikasi android yang akan mengontrol cctv yang dipasang di rumah melalui android', 40000000, '8 Month', 'image-1603270471800.png'),
+(3, 1, 'Project Dating Apps = Tenten', 'membuat aplikasi android pencari jodoh dengan mempertemukan pasangan bedasarkan lokasi ataupun minat', 10000000, '5 Month', 'image-1603270426542.png'),
+(4, 1, 'Urgent Project pemantauan covid', 'membuat aplikasi android yang berfokus terhadap kondisi pandemik covid-19', 100000000, '2 Month', 'image-1603270372824.jpg'),
+(5, 1, 'Project Aplikasi android Hiring Jobs', 'membuat aplikasi android yang membantu para pencari kerja ataupun perusahaan yang sedang mencari karyawan', 50000000, '3 Month', 'image-1603270253473.png'),
+(6, 1, 'Aplikasi android Hiring Jobs software engineer', 'membuat aplikasi android yang membantu para pencari kerja dengan sistem per project khusus untuk software engineer', 45000000, '3 Month', 'image-1603270182787.jpg'),
+(7, 1, 'Project Game Android Peou', 'membuat project game android bernama Peou yang bertemakan seperti tamagochi', 17000000, '10 Month', 'image-1603270057525.png'),
+(8, 1, 'Project Game Android Battle Royale = Penguin arena', 'membuat project game android bernama Penguin arena bertemakan battle royal hingga 50 pemain', 30000000, '12 Month', 'image-1603269966463.png');
 
 -- --------------------------------------------------------
 
@@ -379,7 +381,8 @@ ALTER TABLE `profile_recruiter`
 -- Indexes for table `project_job_seeker`
 --
 ALTER TABLE `project_job_seeker`
-  ADD PRIMARY KEY (`id_project`);
+  ADD PRIMARY KEY (`id_project`),
+  ADD KEY `constraint_id_user` (`user_id`);
 
 --
 -- Indexes for table `project_recruiter`
@@ -449,7 +452,7 @@ ALTER TABLE `profile_recruiter`
 -- AUTO_INCREMENT for table `project_job_seeker`
 --
 ALTER TABLE `project_job_seeker`
-  MODIFY `id_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `project_recruiter`
@@ -497,6 +500,12 @@ ALTER TABLE `profile_job_seeker`
 --
 ALTER TABLE `profile_recruiter`
   ADD CONSTRAINT `constraint_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `project_job_seeker`
+--
+ALTER TABLE `project_job_seeker`
+  ADD CONSTRAINT `constraint_id_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

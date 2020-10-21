@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const {
   getDataProjectModel,
   getDataProjectByIdModel,
@@ -24,13 +25,13 @@ module.exports = {
     const offset = (page - 1) * limit
     getDataProjectModel(searchKey, searchValue, limit, offset, result => {
       if (result.length) {
-        res.send({
+        res.status(200).send({
           success: true,
           message: 'list project',
           data: result
         })
       } else {
-        res.send({
+        res.status(404).send({
           success: true,
           message: 'there is no item on list'
         })
@@ -41,13 +42,13 @@ module.exports = {
     const { id } = req.params
     getDataProjectByIdModel(id, result => {
       if (result.length) {
-        res.send({
+        res.status(200).send({
           success: true,
           message: `Data project id ${id}`,
           data: result[0]
         })
       } else {
-        res.send({
+        res.status(404).send({
           success: true,
           message: `Data project id ${id} was not found!`
         })
@@ -55,18 +56,18 @@ module.exports = {
     })
   },
   createDataProject: (req, res) => {
-    const { name, description, price, duration } = req.body
+    const { name, description, price, duration, user_id } = req.body
+    const image = typeof req.file === 'undefined' ? '' : req.file.filename
     if (name && description && price && duration) {
-      createDataProjectModel([name, description, price, duration], result => {
-        // console.log(result)
-        res.send({
+      createDataProjectModel([name, description, price, duration, user_id], image, result => {
+        res.status(200).send({
           success: true,
           message: 'project has been created',
           data: req.body
         })
       })
     } else {
-      res.send({
+      res.status(400).send({
         success: false,
         message: 'all field must be filled!'
       })
@@ -74,33 +75,34 @@ module.exports = {
   },
   putDataProject: (req, res) => {
     const { name, description, price, duration } = req.body
+    const image = typeof req.file === 'undefined' ? '' : req.file.filename
     const id = req.params.id
     console.log(req.params)
     if (name.trim() && description.trim() && price.trim() && duration.trim()) {
       getDataProjectByIdModel(id, result => {
         if (result.length) {
-          putDataProjectModel({ id, data: [name, description, price, duration] }, result => {
+          putDataProjectModel(id, [name, description, price, duration], image, result => {
             if (result.affectedRows) {
-              res.send({
+              res.status(200).send({
                 success: true,
                 message: `project with id ${id} has been updated`
               })
             } else {
-              res.send({
+              res.status(400).send({
                 success: false,
                 message: 'failed to update data'
               })
             }
           })
         } else {
-          res.send({
+          res.status(404).send({
             success: false,
             message: `project with id ${id} is not found!`
           })
         }
       })
     } else {
-      res.send({
+      res.status(400).send({
         success: false,
         message: 'All field must be filled!'
       })
@@ -112,19 +114,19 @@ module.exports = {
       if (result.length) {
         deleteDataProjectModel(id, result => {
           if (result.affectedRows) {
-            res.send({
+            res.status(200).send({
               success: true,
               message: `Item project id ${id} has been deleted`
             })
           } else {
-            res.send({
+            res.status(400).send({
               success: false,
               message: 'Failed to delete'
             })
           }
         })
       } else {
-        res.send({
+        res.status(404).send({
           success: false,
           message: 'Data project was not found!'
         })
@@ -140,30 +142,28 @@ module.exports = {
           const data = Object.entries(req.body).map(item => {
             return parseInt(item[1]) > 0 ? `${item[0]} = ${item[1]}` : `${item[0]} = '${item[1]}'`
           })
-          console.log(data)
           patchDataProjectModel({ id, data }, result => {
-            console.log(result)
             if (result.affectedRows) {
-              res.send({
+              res.status(200).send({
                 success: true,
                 message: `project with id ${id} has been updated`
               })
             } else {
-              res.send({
+              res.status(400).send({
                 success: false,
                 message: 'failed to update data'
               })
             }
           })
         } else {
-          res.send({
+          res.status(404).send({
             success: false,
             message: 'Data project was not found!'
           })
         }
       })
     } else {
-      res.send({
+      res.status(400).send({
         success: false,
         message: 'Error!'
       })
