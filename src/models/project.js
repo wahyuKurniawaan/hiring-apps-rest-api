@@ -15,7 +15,7 @@ module.exports = {
   },
 
   createDataProjectModel: (data, project_image, callBack) => {
-    db.query(`INSERT INTO project_job_seeker (name, description, price, duration, user_id, project_image)
+    db.query(`INSERT INTO project_job_seeker (name, project_description, price, duration, user_id, project_image)
     VALUES('${data[0]}', '${data[1]}', '${data[2]}', '${data[3]}', ${data[4]}, '${project_image}')`, (err, result, fields) => {
       !err ? callBack(result) : callBack(err)
     })
@@ -24,7 +24,7 @@ module.exports = {
   putDataProjectModel: (id, data, project_image, callBack) => {
     db.query(`UPDATE project_job_seeker SET
     name = '${data[0]}',
-    description = '${data[1]}',
+    project_description = '${data[1]}',
     price = '${data[2]}',
     duration = '${data[3]}',
     project_image = '${project_image}'

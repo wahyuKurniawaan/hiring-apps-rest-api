@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const {
   getProfileJobSeekerDataModel,
   createProfileJobSeekerDataModel,
@@ -23,17 +24,14 @@ module.exports = {
     !page ? page = 1 : page = parseInt(page)
     const offset = (page - 1) * limit
     getProfileJobSeekerDataModel(searchKey, searchValue, limit, offset, result => {
-      console.log(`search key = ${searchKey}`)
-      console.log(`search value = ${searchValue}`)
-      console.log(`search = ${search}`)
       if (result.length) {
-        res.send({
+        res.status(200).send({
           success: true,
           message: 'list profile job seeker',
           data: result
         })
       } else {
-        res.send({
+        res.status(404).send({
           success: false,
           message: 'there is no item on list'
         })
@@ -44,13 +42,13 @@ module.exports = {
     const { id } = req.params
     getProfileJobSeekerDataByIdModel(id, result => {
       if (result.length) {
-        res.send({
+        res.status(200).send({
           success: true,
           message: `Data profile job seeker with id = ${id}`,
           data: result[0]
         })
       } else {
-        res.send({
+        res.status(404).send({
           success: true,
           message: `Data profile job seeker with id = ${id} was not found!`
         })
@@ -58,43 +56,16 @@ module.exports = {
     })
   },
   createProfileJobSeekerData: (req, res) => {
-    const {
-      idAccount,
-      idPortofolio,
-      idSkill,
-      email,
-      fullName,
-      jobTitle,
-      statusJob,
-      address,
-      city,
-      workplace,
-      description
-    } = req.body
-    const image = typeof req.file === 'undefined' ? '' : req.file.filename
-    if (email && fullName && jobTitle && statusJob && city && workplace) {
-      createProfileJobSeekerDataModel([
-        idAccount,
-        idPortofolio,
-        idSkill,
-        email,
-        fullName,
-        jobTitle,
-        statusJob,
-        address,
-        city,
-        workplace,
-        description
-      ], image, result => {
-        console.log(result)
-        res.send({
+    const { user_id } = req.body
+    if (user_id) {
+      createProfileJobSeekerDataModel(user_id, result => {
+        res.status(200).send({
           success: true,
-          message: 'profile has been created',
-          data: console.log(req.body)
+          message: 'profile has been created'
         })
       })
     } else {
-      res.send({
+      res.status(400).send({
         success: false,
         message: 'all field must be filled!'
       })
@@ -102,67 +73,48 @@ module.exports = {
   },
   putProfileJobSeekerData: (req, res) => {
     const {
-      idAccount,
-      idPortofolio,
-      idSkill,
-      email,
-      fullName,
-      jobTitle,
-      statusJob,
+      skill,
+      job_title,
+      status_job,
       address,
       city,
       workplace,
-      description
+      description,
+      user_name,
+      user_email,
+      phone_number
     } = req.body
     const id = req.params.id
-    const image = req.file.filename
-    if (typeof image !== 'undefined') {
-      if (email.trim() && fullName.trim() && jobTitle.trim() && statusJob.trim() && city.trim() &&
-      workplace.trim()) {
-        getProfileJobSeekerDataByIdModel(id, result => {
-          if (result.length) {
-            putProfileJobSeekerDataModel(id, [
-              idAccount,
-              idPortofolio,
-              idSkill,
-              email,
-              fullName,
-              jobTitle,
-              statusJob,
-              address,
-              city,
-              workplace,
-              description
-            ], image, result => {
-              if (result.affectedRows) {
-                res.send({
-                  success: true,
-                  message: `profile with id ${id} has been updated`
-                })
-              } else {
-                res.send({
-                  success: false,
-                  message: 'failed to update data'
-                })
-              }
-            })
-          } else {
-            res.send({
-              success: false,
-              message: `profile with id ${id} is not found!`
-            })
-          }
-        })
-      } else {
-        res.send({
-          success: false,
-          message: 'All field must be filled!'
-        })
-      }
+    const image = typeof req.file === 'undefined' ? '' : req.file.filename
+    if (skill && job_title && status_job && address && city && workplace && description &&
+      user_name && user_email && phone_number) {
+      getProfileJobSeekerDataByIdModel(id, result => {
+        if (result.length) {
+          putProfileJobSeekerDataModel(id, [skill, job_title, status_job, address, city, workplace,
+            description, user_name, user_email, phone_number], image, result => {
+            if (result.affectedRows) {
+              res.status(200).send({
+                success: true,
+                message: `profile with id ${id} has been updated`
+              })
+            } else {
+              res.status(400).send({
+                success: false,
+                message: 'failed to update data'
+              })
+            }
+          })
+        } else {
+          res.status(404).send({
+            success: false,
+            message: `profile with id ${id} is not found!`
+          })
+        }
+      })
     } else {
-      res.send({
+      res.status(400).send({
         success: false,
-        message: 'File image not found!'
+        message: 'All field must be filled!'
       })
     }
   },

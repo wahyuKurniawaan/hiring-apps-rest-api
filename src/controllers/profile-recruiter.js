@@ -65,8 +65,7 @@ module.exports = {
         console.log(result)
         res.send({
           success: true,
-          message: 'profile has been created',
-          data: console.log(req.body)
+          message: 'profile has been created'
         })
       })
     } else {

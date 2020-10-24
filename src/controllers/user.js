@@ -36,7 +36,7 @@ module.exports = {
       created_at: new Date()
     }
     try {
-      if (user_name && user_email && user_password && user_company && role_job && phone_number) {
+      if (user_name && user_email && user_password && phone_number) {
         if (checkEmail.length > 0) {
           response.status(403).send({
             success: false,

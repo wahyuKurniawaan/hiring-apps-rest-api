@@ -56,9 +56,9 @@ module.exports = {
     })
   },
   createOffersData: (req, res) => {
-    const { id_profile_job_seeker, id_project } = req.body
-    if (id_profile_job_seeker.trim() && id_project.trim()) {
-      createOffersDataModel([id_profile_job_seeker, id_project], result => {
+    const { id_profile_job_seeker, id_project, user_id } = req.body
+    if (id_profile_job_seeker.trim() && id_project.trim() && user_id.trim()) {
+      createOffersDataModel([id_profile_job_seeker, id_project, user_id], result => {
         console.log(result)
         res.send({
           success: true,
@@ -73,34 +73,33 @@ module.exports = {
     }
   },
   putOffersData: (req, res) => {
-    const { id_profile_job_seeker, id_project } = req.body
+    const { status } = req.body
     const id = req.params.id
-    if (id_profile_job_seeker.trim() && id_project.trim()) {
+    if (status) {
       getOffersDataByIdModel(id, result => {
         if (result.length) {
-          putOffersDataModel(id, [id_profile_job_seeker, id_project], result => {
+          putOffersDataModel(id, status, result => {
             if (result.affectedRows) {
-              res.send({
+              res.status(200).send({
                 success: true,
                 message: `Offer with id ${id} has been updated`
               })
             } else {
-              console.log(result)
-              res.send({
+              res.status(400).send({
                 success: false,
                 message: 'failed to update data'
               })
             }
           })
         } else {
-          res.send({
+          res.status(404).send({
             success: false,
             message: `Offer with id ${id} is not found!`
           })
         }
       })
     } else {
-      res.send({
+      res.status(400).send({
         success: false,
         message: 'All field must be filled!'
       })
